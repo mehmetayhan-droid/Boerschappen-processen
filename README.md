@@ -1,109 +1,109 @@
+# Boerschappen procesflow
+
+```mermaid
 flowchart TD
-    A[Boerschappen proces] --> B{Welke stroom?}
+    A["Boerschappen proces"] --> B{"Welke stroom?"}
 
-    B --> D2C[D2C boxen]
-    B --> GH[Groothandel / Vitam]
-    B --> DJI[DJI / gevangenissen]
+    B --> D2C_START["D2C boxen"]
+    B --> GH_START["Groothandel en Vitam"]
+    B --> DJI_START["DJI gevangenissen"]
 
-    %% D2C
-    subgraph D2C_FLOW [D2C boxen]
-        D2C --> D2C1[Jaarafspraken met boeren]
-        D2C1 --> D2C2[Team Culinair ontwikkelt recepten voor boxen]
-        D2C2 --> D2C3{Zijn alle producten beschikbaar via jaarafspraken?}
+    subgraph D2C_FLOW["D2C boxen"]
+        D2C_START --> D2C_1["Jaarafspraken met boeren"]
+        D2C_1 --> D2C_2["Team Culinair ontwikkelt recepten"]
+        D2C_2 --> D2C_3{"Zijn alle producten beschikbaar via jaarafspraken?"}
 
-        D2C3 -->|Ja| D2C5[Producten worden geleverd]
-        D2C3 -->|Nee| D2C4[Ontbrekende producten inkopen bij boeren en/of groothandels]
-        D2C4 --> D2C5
+        D2C_3 -->|Ja| D2C_5["Producten worden geleverd"]
+        D2C_3 -->|Nee| D2C_4["Ontbrekende producten inkopen"]
+        D2C_4 --> D2C_5
 
-        D2C5 --> D2C6[Planning en verwerking in Excel en deels Odoo]
-        D2C6 --> D2C7[Boxen packen op de Ijsvogel bij HQDC]
-        D2C7 --> D2C8{Uitlevering naar consument}
+        D2C_5 --> D2C_6["Planning en verwerking in Excel en deels Odoo"]
+        D2C_6 --> D2C_7["Boxen packen op de Ijsvogel bij HQDC"]
+        D2C_7 --> D2C_8{"Uitlevering naar consument"}
 
-        D2C8 --> D2C9[Pick up point]
-        D2C8 --> D2C10[Trunkrs]
-        D2C8 --> D2C11[Fietskoeriers]
-        D2C8 --> D2C12[Boerschappen busjes]
+        D2C_8 --> D2C_9["Pick up point"]
+        D2C_8 --> D2C_10["Trunkrs"]
+        D2C_8 --> D2C_11["Fietskoeriers"]
+        D2C_8 --> D2C_12["Boerschappen busjes"]
     end
 
-    %% Groothandel
-    subgraph GH_FLOW [Groothandel / Vitam]
-        GH --> GH1{Orderkanaal}
-        GH1 -->|Boerschappen site| GH2[Verkooporder]
-        GH1 -->|Apicbase| GH3[Automatische verkooporder in Odoo]
+    subgraph GH_FLOW["Groothandel en Vitam"]
+        GH_START --> GH_1{"Orderkanaal"}
+        GH_1 -->|Boerschappen site| GH_2["Verkooporder"]
+        GH_1 -->|Apicbase| GH_3["Automatische verkooporder in Odoo"]
 
-        GH2 --> GH4[Order in Odoo]
-        GH3 --> GH4
+        GH_2 --> GH_4["Order in Odoo"]
+        GH_3 --> GH_4
 
-        GH4 --> GH5[Cut off tijd 13:00]
-        GH5 --> GH6{Zijn er voorverpakte of gesneden producten nodig?}
+        GH_4 --> GH_5["Cut off tijd 13:00"]
+        GH_5 --> GH_6{"Voorverpakte of gesneden producten nodig?"}
 
-        GH6 -->|Nee| GH9[Picken via Odoo, scanners en productlijnen]
-        GH6 -->|Ja| GH7[Voor 15:00 bestellen bij leverancier]
-        GH7 --> GH8[Producten komen dezelfde dag binnen]
-        GH8 --> GH9
+        GH_6 -->|Nee| GH_9["Picken via Odoo, scanners en productlijnen"]
+        GH_6 -->|Ja| GH_7["Voor 15:00 bestellen bij leverancier"]
+        GH_7 --> GH_8["Producten komen dezelfde dag binnen"]
+        GH_8 --> GH_9
 
-        GH9 --> GH10[Producten op verschillende locaties picken]
-        GH10 --> GH11[Extra producten op het einde toevoegen aan kratten]
-        GH11 --> GH12[Orders packen]
-        GH12 --> GH13[Orders verzenden naar distributielocaties]
+        GH_9 --> GH_10["Producten picken op verschillende locaties"]
+        GH_10 --> GH_11["Extra producten op het einde toevoegen aan kratten"]
+        GH_11 --> GH_12["Orders packen"]
+        GH_12 --> GH_13["Orders verzenden naar distributielocaties"]
 
-        GH13 --> GH14{Distributielocatie}
-        GH14 --> GH15[Breda HQ]
-        GH14 --> GH16[Diemen]
-        GH14 --> GH17[Kampen]
+        GH_13 --> GH_14{"Distributielocatie"}
+        GH_14 --> GH_15["Breda HQ"]
+        GH_14 --> GH_16["Diemen"]
+        GH_14 --> GH_17["Kampen"]
 
-        GH13 --> GH18[Orderstroom naar NextUp]
-        GH18 --> GH19[Routes maken voor drop off]
-        GH19 --> GH20[Mogelijke pick up van inkooporders meenemen]
+        GH_13 --> GH_18["Orderstroom naar NextUp"]
+        GH_18 --> GH_19["Routes maken voor drop off"]
+        GH_19 --> GH_20["Mogelijke pick up van inkooporders meenemen"]
     end
 
-    %% DJI
-    subgraph DJI_FLOW [DJI / gevangenissen]
-        DJI --> DJI1[14 locaties totaal]
-        DJI1 --> DJI2{3 verschillende takken}
+    subgraph DJI_FLOW["DJI gevangenissen"]
+        DJI_START --> DJI_1["14 locaties totaal"]
+        DJI_1 --> DJI_2{"3 verschillende takken"}
 
-        DJI2 -->|Jeugd| DJI3[Koken met groep op locatie]
-        DJI2 -->|Grootkeukens| DJI4[Graaf en Middelburg]
-        DJI2 -->|Volwassen zelfstandig koken| DJI5[Maaltijden per persoon ingepakt]
+        DJI_2 -->|Jeugd| DJI_3["Koken met groep op locatie"]
+        DJI_2 -->|Grootkeukens| DJI_4["Graaf en Middelburg"]
+        DJI_2 -->|Volwassen zelfstandig koken| DJI_5["Maaltijden per persoon ingepakt"]
 
-        DJI3 --> DJI6[Rekensom maken voor benodigde producten]
-        DJI4 --> DJI7[Grootverpakking berekenen]
-        DJI5 --> DJI8[Maaltijden per persoon berekenen]
+        DJI_3 --> DJI_6["Rekensom maken"]
+        DJI_4 --> DJI_7["Grootverpakking berekenen"]
+        DJI_5 --> DJI_8["Maaltijden per persoon berekenen"]
 
-        DJI6 --> DJI9[Recepten weken van tevoren doorgestuurd]
-        DJI7 --> DJI9
-        DJI8 --> DJI9
+        DJI_6 --> DJI_9["Recepten weken vooraf doorgestuurd"]
+        DJI_7 --> DJI_9
+        DJI_8 --> DJI_9
 
-        DJI9 --> DJI10[Recepten worden goedgekeurd]
-        DJI10 --> DJI11[Bestellingen komen binnen via mail]
-        DJI11 --> DJI12[Alles wordt verwerkt in Excel]
+        DJI_9 --> DJI_10["Recepten worden goedgekeurd"]
+        DJI_10 --> DJI_11["Bestellingen komen binnen via mail"]
+        DJI_11 --> DJI_12["Alles wordt verwerkt in Excel"]
 
-        DJI12 --> DJI13{3 Excel bestanden}
-        DJI13 --> DJI14[Excel voor recepten]
-        DJI13 --> DJI15[Excel voor berekening grootverpakking]
-        DJI13 --> DJI16[Excel voor berekening maaltijden per persoon]
+        DJI_12 --> DJI_13{"3 Excel bestanden"}
+        DJI_13 --> DJI_14["Excel voor recepten"]
+        DJI_13 --> DJI_15["Excel voor berekening grootverpakking"]
+        DJI_13 --> DJI_16["Excel voor berekening maaltijden per persoon"]
 
-        DJI14 --> DJI17[Productbehoefte bepalen]
-        DJI15 --> DJI17
-        DJI16 --> DJI17
+        DJI_14 --> DJI_17["Productbehoefte bepalen"]
+        DJI_15 --> DJI_17
+        DJI_16 --> DJI_17
 
-        DJI17 --> DJI18[Producten inkopen]
-        DJI18 --> DJI19[Producten apart leggen voor DJI klant]
-        DJI19 --> DJI20[Producten invoeren in OutSystems]
-        DJI20 --> DJI21[Producten packen op de Ijsvogel]
-        DJI21 --> DJI22[DJI orders verzendklaar maken]
-        DJI22 --> DJI23[Verzending via vervoerder]
-        DJI23 --> DJI24[Levering aan DJI locaties]
+        DJI_17 --> DJI_18["Producten inkopen"]
+        DJI_18 --> DJI_19["Producten apart leggen voor DJI klant"]
+        DJI_19 --> DJI_20["Producten invoeren in OutSystems"]
+        DJI_20 --> DJI_21["Producten packen op de Ijsvogel"]
+        DJI_21 --> DJI_22["DJI orders verzendklaar maken"]
+        DJI_22 --> DJI_23["Verzending via vervoerder"]
+        DJI_23 --> DJI_24["Levering aan DJI locaties"]
     end
 
-    %% Systemen
-    D2C6 -.-> SYS1[Excel]
-    D2C6 -.-> SYS2[Odoo]
+    D2C_6 -.-> SYS_1["Excel"]
+    D2C_6 -.-> SYS_2["Odoo"]
 
-    GH3 -.-> SYS3[Apicbase]
-    GH4 -.-> SYS2
-    GH9 -.-> SYS2
-    GH18 -.-> SYS4[NextUp]
+    GH_3 -.-> SYS_3["Apicbase"]
+    GH_4 -.-> SYS_2
+    GH_9 -.-> SYS_2
+    GH_18 -.-> SYS_4["NextUp"]
 
-    DJI12 -.-> SYS1
-    DJI20 -.-> SYS5[OutSystems]
+    DJI_12 -.-> SYS_1
+    DJI_20 -.-> SYS_5["OutSystems"]
+```
